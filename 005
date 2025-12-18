@@ -1,12 +1,14 @@
 --[[ 
-    ZOKA_OS_V1 - COMPATIBILITY MODE
+    ZOKA_OS_V1 - COMPATIBILITY MODE (AIMBOT_HUB)
     Remplacement des sliders par des boutons "+" et "-" pour garantir l'affichage.
+    Animations Glitch & Sons Système Intégrés.
 ]]
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 
@@ -20,18 +22,48 @@ _G.ShowFOV = false
 _G.TargetPart = "Head"
 _G.WallCheck = true 
 
+local SOUNDS = {
+    Static = "rbxassetid://140043289814504", 
+    Toggle = "rbxassetid://80099403859001",
+}
+
 -- Nettoyage
 if CoreGui:FindFirstChild("ZokaOS_V1") then CoreGui.ZokaOS_V1:Destroy() end
 
 local screenGui = Instance.new("ScreenGui", CoreGui)
 screenGui.Name = "ZokaOS_V1"
+screenGui.IgnoreGuiInset = true
 
 local mainFrame = Instance.new("Frame", screenGui)
+mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 350, 0, 550)
 mainFrame.Position = UDim2.new(0.5, -175, 0.2, 0)
 mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainFrame.Visible = false
 mainFrame.Active = true
 mainFrame.Draggable = true
+
+-----------------------------------------------------------
+-- UTILS GLITCH & STYLE
+-----------------------------------------------------------
+local function playSound(id, vol)
+    local s = Instance.new("Sound")
+    s.SoundId = id
+    s.Volume = vol or 0.5
+    s.Parent = screenGui
+    s:Play()
+    s.Ended:Connect(function() s:Destroy() end)
+end
+
+local function fullScreenGlitch()
+    local line = Instance.new("Frame", screenGui)
+    line.Size = UDim2.new(1, 0, 0, math.random(2, 15))
+    line.Position = UDim2.new(0, 0, math.random(), 0)
+    line.BackgroundColor3 = (math.random() > 0.5 and Color3.fromRGB(0, 255, 100) or Color3.fromRGB(255, 0, 80))
+    line.BorderSizePixel = 0
+    line.ZIndex = 10000
+    task.delay(0.04, function() line:Destroy() end)
+end
 
 local function applyStyle(obj, color)
     local stroke = Instance.new("UIStroke", obj)
@@ -43,16 +75,78 @@ applyStyle(mainFrame)
 
 local title = Instance.new("TextLabel", mainFrame)
 title.Size = UDim2.new(1, 0, 0, 50)
-title.Text = "/// ZOKA_OS_V1 : AIM_SUBSYSTEM ///"
+title.Text = "/// ZOKA_OS_V1 : AIMBOT_HUB ///"
 title.TextColor3 = Color3.fromRGB(0, 255, 100)
 title.Font = Enum.Font.Code
 title.TextSize = 16
 title.BackgroundTransparency = 1
 
 -----------------------------------------------------------
--- CRÉATION MANUELLE DES ÉLÉMENTS
+-- ANIMATION OUVERTURE / FERMETURE
 -----------------------------------------------------------
+local isOpen = false
+local function toggleUI()
+    if not isOpen then
+        isOpen = true 
+        playSound(SOUNDS.Toggle, 0.7)
+        local targetPos = mainFrame.Position
+        local absPos = mainFrame.AbsolutePosition
+        local absSize = mainFrame.AbsoluteSize
+        
+        for i = 1, 25 do
+            task.spawn(function()
+                local p = Instance.new("Frame", screenGui)
+                p.BorderSizePixel = 0
+                p.BackgroundColor3 = (math.random() > 0.5 and Color3.fromRGB(0, 255, 100) or Color3.fromRGB(255, 255, 255))
+                p.ZIndex = 10001
+                p.Position = UDim2.new(0, absPos.X + (absSize.X/2) + math.random(-200, 200), 0, absPos.Y + (absSize.Y/2) + math.random(-200, 200))
+                local t = TweenService:Create(p, TweenInfo.new(0.4), {
+                    Position = UDim2.new(0, absPos.X + math.random(0, absSize.X), 0, absPos.Y + math.random(0, absSize.Y)),
+                    Size = UDim2.new(0, math.random(5, 20), 0, math.random(5, 20)),
+                    BackgroundTransparency = 0.3
+                })
+                t:Play()
+                fullScreenGlitch()
+                t.Completed:Connect(function() task.wait(0.05) p:Destroy() end)
+            end)
+        end
+        task.wait(0.1)
+        mainFrame.Visible = true
+        for i = 1, 6 do
+            mainFrame.Position = targetPos + UDim2.new(0, math.random(-5, 5), 0, math.random(-5, 5))
+            fullScreenGlitch()
+            task.wait(0.02)
+        end
+        mainFrame.Position = targetPos
+    else
+        isOpen = false
+        playSound(SOUNDS.Static, 0.8)
+        local absPos = mainFrame.AbsolutePosition
+        local absSize = mainFrame.AbsoluteSize
+        mainFrame.Visible = false
+        for i = 1, 20 do
+            task.spawn(function()
+                local p = Instance.new("Frame", screenGui)
+                p.BorderSizePixel = 0
+                p.BackgroundColor3 = Color3.fromRGB(0, 255, 100)
+                p.Position = UDim2.new(0, absPos.X + math.random(0, absSize.X), 0, absPos.Y + math.random(0, absSize.Y))
+                p.Size = UDim2.new(0, 15, 0, 15)
+                local t = TweenService:Create(p, TweenInfo.new(0.5), {
+                    Position = p.Position + UDim2.new(0, math.random(-50, 50), 0, 300),
+                    BackgroundTransparency = 1,
+                    Rotation = 180
+                })
+                t:Play()
+                fullScreenGlitch()
+                t.Completed:Connect(function() p:Destroy() end)
+            end)
+        end
+    end
+end
 
+-----------------------------------------------------------
+-- CRÉATION DES ÉLÉMENTS
+-----------------------------------------------------------
 local function createButton(text, pos, color, callback)
     local btn = Instance.new("TextButton", mainFrame)
     btn.Size = UDim2.new(0.9, 0, 0, 35)
@@ -62,13 +156,14 @@ local function createButton(text, pos, color, callback)
     btn.TextColor3 = color or Color3.fromRGB(255, 255, 255)
     btn.Font = Enum.Font.Code
     btn.TextSize = 13
-    btn.TextStrokeTransparency = 1
     applyStyle(btn, color)
-    btn.MouseButton1Click:Connect(function() callback(btn) end)
+    btn.MouseButton1Click:Connect(function() 
+        playSound(SOUNDS.Static, 0.2)
+        callback(btn) 
+    end)
     return btn
 end
 
--- 1. TOGGLES
 createButton("> SYSTEM_ENABLE : [OFF]", UDim2.new(0.05, 0, 0.10, 0), nil, function(b)
     _G.AimbotEnabled = not _G.AimbotEnabled
     b.Text = "> SYSTEM_ENABLE : [" .. (_G.AimbotEnabled and "ON" or "OFF") .. "]"
@@ -87,20 +182,17 @@ createButton("> WALL_CHECK : [ON]", UDim2.new(0.05, 0, 0.26, 0), Color3.fromRGB(
     b.TextColor3 = _G.WallCheck and Color3.fromRGB(255, 200, 0) or Color3.fromRGB(255, 255, 255)
 end)
 
--- 2. FOV CONTROL
 createButton("> FOV_RADIUS : " .. _G.AimbotFOV, UDim2.new(0.05, 0, 0.34, 0), Color3.fromRGB(0, 255, 150), function(b)
     _G.AimbotFOV = (_G.AimbotFOV >= 800) and 50 or _G.AimbotFOV + 50
     b.Text = "> FOV_RADIUS : " .. _G.AimbotFOV
 end)
 
--- 3. SMOOTH CONTROL
 createButton("> SMOOTH_POWER : " .. _G.AimbotSmoothness, UDim2.new(0.05, 0, 0.42, 0), Color3.fromRGB(0, 255, 150), function(b)
     _G.AimbotSmoothness = (_G.AimbotSmoothness >= 1) and 0.1 or _G.AimbotSmoothness + 0.1
     _G.AimbotSmoothness = math.floor(_G.AimbotSmoothness * 10) / 10
     b.Text = "> SMOOTH_POWER : " .. string.format("%.1f", _G.AimbotSmoothness)
 end)
 
--- 4. TARGET PART
 local bones = {"Head", "UpperTorso", "HumanoidRootPart"}
 local bIdx = 1
 createButton("> TARGET_PART : [Head]", UDim2.new(0.05, 0, 0.50, 0), Color3.fromRGB(0, 200, 255), function(b)
@@ -109,7 +201,6 @@ createButton("> TARGET_PART : [Head]", UDim2.new(0.05, 0, 0.50, 0), Color3.fromR
     b.Text = "> TARGET_PART : [" .. _G.TargetPart .. "]"
 end)
 
--- 5. AIM KEYBIND
 createButton("> AIM_KEY : [" .. _G.AimbotKey.Name .. "]", UDim2.new(0.05, 0, 0.58, 0), Color3.fromRGB(255, 0, 80), function(b)
     b.Text = ">> PRESS KEY <<"
     local c; c = UserInputService.InputBegan:Connect(function(i)
@@ -119,14 +210,12 @@ createButton("> AIM_KEY : [" .. _G.AimbotKey.Name .. "]", UDim2.new(0.05, 0, 0.5
     end)
 end)
 
--- 6. LIGNE
 local line = Instance.new("Frame", mainFrame)
 line.Size = UDim2.new(0.9, 0, 0, 2)
 line.Position = UDim2.new(0.05, 0, 0.68, 0)
 line.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 line.BorderSizePixel = 0
 
--- 7. MENU KEYBIND
 createButton("> MENU_TOGGLE : [" .. _G.MenuKey.Name .. "]", UDim2.new(0.05, 0, 0.73, 0), Color3.fromRGB(150, 150, 150), function(b)
     b.Text = ">> PRESS KEY <<"
     local c; c = UserInputService.InputBegan:Connect(function(i)
@@ -137,7 +226,7 @@ createButton("> MENU_TOGGLE : [" .. _G.MenuKey.Name .. "]", UDim2.new(0.05, 0, 0
 end)
 
 -----------------------------------------------------------
--- LOGIQUE TECHNIQUE (BROOKHAVEN SPECIAL)
+-- LOGIQUE TECHNIQUE
 -----------------------------------------------------------
 local FOVCircle = Drawing.new("Circle")
 FOVCircle.Thickness = 1
@@ -146,33 +235,21 @@ FOVCircle.Transparency = 0.5
 
 local function isVisible(targetPart)
     if not _G.WallCheck then return true end
-    
     local char = LocalPlayer.Character
     if not char then return false end
-    
     local origin = Camera.CFrame.Position
     local destination = targetPart.Position
     local direction = (destination - origin)
-    
-    -- Utilisation de la méthode Raycast classique mais avec ignore des accessoires
     local params = RaycastParams.new()
     params.FilterType = Enum.RaycastFilterType.Exclude
-    -- On exclut TOUT ce qui appartient aux joueurs pour ne garder que la map
     local filterList = {char, Camera}
     for _, p in pairs(Players:GetPlayers()) do
         if p.Character then table.insert(filterList, p.Character) end
     end
     params.FilterDescendantsInstances = filterList
     params.IgnoreWater = true
-    
     local result = workspace:Raycast(origin, direction, params)
-    
-    -- Si result existe, c'est qu'on a touché un objet de la MAP (maison, mur, sol)
-    if result then
-        return false -- Quelque chose bloque
-    end
-    
-    return true -- Rien ne bloque
+    return result == nil
 end
 
 RunService.RenderStepped:Connect(function()
@@ -183,24 +260,19 @@ RunService.RenderStepped:Connect(function()
     if _G.AimbotEnabled and UserInputService:IsKeyDown(_G.AimbotKey) then
         local target = nil
         local dist = _G.AimbotFOV
-        
         for _, v in pairs(Players:GetPlayers()) do
             if v ~= LocalPlayer and v.Character and v.Character:FindFirstChild(_G.TargetPart) then
                 local part = v.Character[_G.TargetPart]
                 local pos, vis = Camera:WorldToViewportPoint(part.Position)
-                
                 if vis then
                     local mDist = (Vector2.new(pos.X, pos.Y) - UserInputService:GetMouseLocation()).Magnitude
-                    if mDist < dist then 
-                        if isVisible(part) then
-                            dist = mDist
-                            target = v 
-                        end
+                    if mDist < dist and isVisible(part) then
+                        dist = mDist
+                        target = v 
                     end
                 end
             end
         end
-        
         if target then
             Camera.CFrame = Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.Position, target.Character[_G.TargetPart].Position), _G.AimbotSmoothness)
         end
@@ -208,5 +280,9 @@ RunService.RenderStepped:Connect(function()
 end)
 
 UserInputService.InputBegan:Connect(function(input)
-    if input.KeyCode == _G.MenuKey then mainFrame.Visible = not mainFrame.Visible end
+    if input.KeyCode == _G.MenuKey then toggleUI() end
 end)
+
+-- Lancement initial (Visible au départ avec animation)
+task.wait(0.1)
+toggleUI()
