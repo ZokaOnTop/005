@@ -1,1 +1,436 @@
-local v0=game:GetService("Players");local v1=game:GetService("RunService");local v2=game:GetService("UserInputService");local v3=game:GetService("CoreGui");local v4=game:GetService("TweenService");local v5=v0.LocalPlayer;local v6=workspace.CurrentCamera;_G.AimbotEnabled=false;_G.AimbotKey=Enum.KeyCode.E;_G.MenuKey=Enum.KeyCode.RightShift;_G.AimbotSmoothness=1080.5 -(1020 + 60) ;_G.AimbotFOV=1573 -(630 + 793) ;_G.ShowFOV=false;_G.TargetPart="Head";_G.WallCheck=true;local v9={Static="rbxassetid://140043289814504",Toggle="rbxassetid://80099403859001"};if v3:FindFirstChild("ZokaOS_V1") then v3:FindFirstChild("ZokaOS_V1"):Destroy();end local v10=Instance.new("ScreenGui",v3);v10.Name="ZokaOS_V1";v10.IgnoreGuiInset=true;local v13=Instance.new("Frame",v10);v13.Name="MainFrame";v13.Size=UDim2.new(0 -0 ,350,0 -0 ,955 -(118 + 287) );v13.Position=UDim2.new(0.5 -0 , -(69 + 106),0.2 -0 ,1747 -(760 + 987) );v13.BackgroundColor3=Color3.fromRGB(0 -0 ,377 -(142 + 235) ,0 -0 );v13.Visible=false;v13.Active=true;v13.Draggable=true;local function v21(v42,v43) local v44=1913 -(1789 + 124) ;local v45;while true do if (v44==(766 -(745 + 21))) then v45=Instance.new("Sound",v10);v45.SoundId=v42;v44=1 + 0 ;end if (v44==(2 -1)) then v45.Volume=v43 or (0.5 -0) ;v45:Play();v44=2 + 0 ;end if (v44==(1 + 1)) then task.delay(2 + 0 ,function() v45:Destroy();end);break;end end end local function v22() local v46=Instance.new("Frame",v10);v46.Size=UDim2.new(1 + 0 ,1055 -(87 + 968) ,0 -0 ,math.random(8 -6 ,14 + 1 ));v46.Position=UDim2.new(0 -0 ,0 -0 ,math.random(),1413 -(447 + 966) );v46.BackgroundColor3=((math.random()>(0.5 -0)) and Color3.fromRGB(753 -(239 + 514) ,2072 -(1703 + 114) ,801 -(376 + 325) )) or Color3.fromRGB(90 + 165 ,417 -162 ,784 -529 ) ;v46.BorderSizePixel=0 + 0 ;v46.ZIndex=2858 + 7142 ;task.delay(0.04,function() v46:Destroy();end);end local v23=false;local function v24() if  not v23 then v23=true;v21(v9.Toggle,0.7 -0 );local v89=v13.Position;local v90=v13.AbsolutePosition;local v91=v13.AbsoluteSize;for v99=15 -(9 + 5) ,406 -(85 + 291)  do local v100=731 -(476 + 255) ;while true do if ((1265 -(243 + 1022))==v100) then task.spawn(function() local v130=0 -0 ;local v131;local v132;local v133;local v134;local v135;local v136;while true do if (v130==(1 + 0)) then v131.ZIndex=11181 -(1123 + 57) ;v132=v90.X + (v91.X/(2 + 0)) + math.random( -(544 -244),554 -(163 + 91) ) ;v133=v90.Y + (v91.Y/(240 -(64 + 174))) + math.random( -(2230 -(1869 + 61)),84 + 216 ) ;v131.Position=UDim2.new(0 -0 ,v132,0 -0 ,v133);v130=2;end if (v130==(0 + 0)) then v131=Instance.new("Frame",v10);v131.BorderSizePixel=0 -0 ;v131.BackgroundColor3=((math.random()>(0.5 + 0)) and Color3.fromRGB(1474 -(1329 + 145) ,1759 -(363 + 1141) ,100)) or Color3.fromRGB(1226 -(140 + 831) ,2105 -(1409 + 441) ,973 -(15 + 703) ) ;v131.Size=UDim2.new(0 + 0 ,0 + 0 ,438 -(262 + 176) ,1721 -(345 + 1376) );v130=689 -(198 + 490) ;end if (v130==(1936 -(565 + 1368))) then v136:Play();v22();v136.Completed:Connect(function() local v160=0 -0 ;while true do if (v160==(0 -0)) then task.wait(0.05 -0 );v131:Destroy();break;end end end);break;end if (v130==(1208 -(696 + 510))) then v131.BackgroundTransparency=857 -(564 + 292) ;v134=v90.X + math.random(0 -0 ,v91.X) ;v135=v90.Y + math.random(0,v91.Y) ;v136=v4:Create(v131,TweenInfo.new(0.5 -0 ,Enum.EasingStyle.Quart,Enum.EasingDirection.Out),{Position=UDim2.new(1262 -(1091 + 171) ,v134,304 -(244 + 60) ,v135),Size=UDim2.new(0 + 0 ,math.random(481 -(41 + 435) ,5 + 20 ),0 -0 ,math.random(16 -11 ,1150 -(936 + 189) )),BackgroundTransparency=374.2 -(123 + 251) ,Rotation=math.random( -180,894 -714 )});v130=701 -(208 + 490) ;end end end);if ((v99%(4 + 2))==(1138 -(782 + 356))) then task.wait();end break;end end end task.wait(0.2 + 0 );v13.Visible=true;for v101=1 + 0 ,8 do v22();v13.Position=UDim2.new(v89.X.Scale,v89.X.Offset + math.random( -(841 -(660 + 176)),1 + 4 ) ,v89.Y.Scale,v89.Y.Offset + math.random( -(1880 -(157 + 1718)),5) );task.wait(202.01 -(14 + 188) );end v13.Position=v89;else v23=false;v21(v9.Static,0.8 -0 );local v94=v13.AbsolutePosition;local v95=v13.AbsoluteSize;v13.Visible=false;for v103=676 -(534 + 141) ,11 + 14  do local v104=0 + 0 ;while true do if (v104==(0 -0)) then task.spawn(function() local v137=0 -0 ;local v138;local v139;local v140;local v141;while true do if (v137==(2 + 0)) then v139=math.random( -(315 -165),238 -88 );v140=math.random(561 -361 ,269 + 231 );v141=v4:Create(v138,TweenInfo.new(611.6 -(602 + 9) ,Enum.EasingStyle.Quart,Enum.EasingDirection.In),{Position=v138.Position + UDim2.new(1189 -(449 + 740) ,v139,0 + 0 ,v140) ,Rotation=math.random( -(1127 -(245 + 702)),576 -(115 + 281) ),BackgroundTransparency=1 + 0 ,Size=UDim2.new(1898 -(260 + 1638) ,440 -(382 + 58) ,0 -0 ,0 + 0 )});v137=7 -4 ;end if ((5 -2)==v137) then v141:Play();v22();v141.Completed:Connect(function() v138:Destroy();end);break;end if (v137==(2 -1)) then v138.Size=UDim2.new(0 -0 ,math.random(877 -(550 + 317) ,1245 -(902 + 303) ),0 -0 ,math.random(10,56 -16 ));v138.Position=UDim2.new(0 -0 ,v94.X + math.random(0,v95.X) ,285 -(134 + 151) ,v94.Y + math.random(1665 -(970 + 695) ,v95.Y) );v138.ZIndex=10001;v137=3 -1 ;end if (v137==(683 -(483 + 200))) then v138=Instance.new("Frame",v10);v138.BorderSizePixel=1990 -(582 + 1408) ;v138.BackgroundColor3=((math.random()>0.5) and Color3.fromRGB(0 -0 ,320 -65 ,376 -276 )) or Color3.fromRGB(54 -34 ,1844 -(1195 + 629) ,26 -6 ) ;v137=242 -(187 + 54) ;end end end);if ((v103%(785 -(162 + 618)))==(0 + 0)) then task.wait();end break;end end end end end local function v25(v52,v53) local v54=Instance.new("UIStroke",v52);v54.Color=v53 or Color3.fromRGB(0 -0 ,255,231 -131 ) ;v54.Thickness=1 + 0 ;Instance.new("UICorner",v52).CornerRadius=UDim.new(0 + 0 ,8 -4 );end v25(v13);local v26=Instance.new("TextLabel",v13);v26.Size=UDim2.new(1 -0 ,0 + 0 ,1636 -(1373 + 263) ,1050 -(451 + 549) );v26.Text="ZOKA_OS_V1  //  AIM_HUB";v26.TextColor3=Color3.fromRGB(0 + 0 ,396 -141 ,168 -68 );v26.Font=Enum.Font.Code;v26.TextSize=4 + 12 ;v26.BackgroundTransparency=1385 -(746 + 638) ;local function v34(v58,v59,v60,v61) local v62=0 + 0 ;local v63;while true do if (v62==(4 -1)) then v63.MouseButton1Click:Connect(function() v61(v63);end);return v63;end if ((343 -(218 + 123))==v62) then v63.Font=Enum.Font.Code;v63.TextSize=13;v25(v63,v60);v62=3;end if (v62==(1582 -(1535 + 46))) then v63.BackgroundColor3=Color3.fromRGB(15,15 + 0 ,3 + 12 );v63.Text=v58;v63.TextColor3=v60 or Color3.fromRGB(815 -(306 + 254) ,16 + 239 ,500 -245 ) ;v62=1469 -(899 + 568) ;end if (v62==(0 + 0)) then v63=Instance.new("TextButton",v13);v63.Size=UDim2.new(0.9 -0 ,603 -(268 + 335) ,0 + 0 ,87 -52 );v63.Position=v59;v62=291 -(60 + 230) ;end end end v34("SYSTEM_ENABLE [OFF]",UDim2.new(572.05 -(426 + 146) ,0 + 0 ,0.1,1456 -(282 + 1174) ),nil,function(v64) local v65=811 -(569 + 242) ;while true do if (v65==(0 -0)) then _G.AimbotEnabled= not _G.AimbotEnabled;v64.Text="SYSTEM_ENABLE ["   .. ((_G.AimbotEnabled and "ON") or "OFF")   .. "]" ;break;end end end);v34("SHOW_FOV [OFF]",UDim2.new(0.05 + 0 ,0,1024.18 -(706 + 318) ,1251 -(721 + 530) ),nil,function(v66) _G.ShowFOV= not _G.ShowFOV;v66.Text="SHOW_FOV ["   .. ((_G.ShowFOV and "ON") or "OFF")   .. "]" ;end);v34("WALL_CHECK [ON]",UDim2.new(0.05,1271 -(945 + 326) ,0.26 -0 ,0 + 0 ),Color3.fromRGB(255,900 -(271 + 429) ,0 + 0 ),function(v68) _G.WallCheck= not _G.WallCheck;v68.Text="WALL_CHECK ["   .. ((_G.WallCheck and "ON") or "OFF")   .. "]" ;end);v34("FOV_RADIUS: "   .. _G.AimbotFOV ,UDim2.new(0.05 + 0 ,0,1500.34 -(1408 + 92) ,806 -(118 + 688) ),Color3.fromRGB(0,1341 -(461 + 625) ,1438 -(993 + 295) ),function(v70) _G.AimbotFOV=((_G.AimbotFOV>=(42 + 758)) and (1221 -(418 + 753))) or (_G.AimbotFOV + 20 + 30) ;v70.Text="FOV_RADIUS: "   .. _G.AimbotFOV ;end);v34("SMOOTH: "   .. _G.AimbotSmoothness ,UDim2.new(1886.05 -(927 + 959) ,0 + 0 ,0.42 + 0 ,0 -0 ),Color3.fromRGB(97 -(11 + 86) ,65 + 190 ,679 -(406 + 123) ),function(v72) local v73=1769 -(1749 + 20) ;while true do if (v73==(0 + 0)) then _G.AimbotSmoothness=((_G.AimbotSmoothness>=(1323 -(1249 + 73))) and 0.1) or (_G.AimbotSmoothness + 0.1) ;v72.Text="SMOOTH: "   .. string.format("%.1f",_G.AimbotSmoothness) ;break;end end end);local v35={"Head","UpperTorso","HumanoidRootPart"};local v36=1 + 0 ;v34("TARGET: [Head]",UDim2.new(0.05 + 0 ,1061 -(810 + 251) ,1145.5 -(466 + 679) ,0 -0 ),Color3.fromRGB(0 -0 ,200,2155 -(106 + 1794) ),function(v74) v36=(v36% #v35) + 1 + 0 ;_G.TargetPart=v35[v36];v74.Text="TARGET: ["   .. _G.TargetPart   .. "]" ;end);v34("AIM_KEY ["   .. _G.AimbotKey.Name   .. "]" ,UDim2.new(0.05 + 0 ,0 -0 ,733.58 -(711 + 22) ,0),Color3.fromRGB(690 -435 ,114 -(4 + 110) ,664 -(57 + 527) ),function(v77) local v78=859 -(240 + 619) ;local v79;while true do if (v78==(1 + 0)) then v79=v2.InputBegan:Connect(function(v123) if (v123.UserInputType==Enum.UserInputType.Keyboard) then local v128=1427 -(41 + 1386) ;while true do if (v128==(103 -(17 + 86))) then _G.AimbotKey=v123.KeyCode;v77.Text="AIM_KEY ["   .. v123.KeyCode.Name   .. "]" ;v128=1 + 0 ;end if (v128==1) then v79:Disconnect();break;end end end end);break;end if (v78==(0 -0)) then v77.Text="PRESS KEY...";v79=nil;v78=2 -1 ;end end end);v34("MENU_KEY ["   .. _G.MenuKey.Name   .. "]" ,UDim2.new(0.05 + 0 ,166 -(122 + 44) ,0.7 -0 ,0 -0 ),Color3.fromRGB(556 -(183 + 223) ,497 -347 ,123 + 27 ),function(v80) local v81=0 + 0 ;local v82;while true do if (v81==(0 -0)) then v80.Text="PRESS KEY...";v82=nil;v81=66 -(30 + 35) ;end if (v81==(1 + 0)) then v82=v2.InputBegan:Connect(function(v124) if (v124.UserInputType==Enum.UserInputType.Keyboard) then local v129=1257 -(1043 + 214) ;while true do if (v129==(3 -2)) then v82:Disconnect();break;end if (v129==(1212 -(323 + 889))) then _G.MenuKey=v124.KeyCode;v80.Text="MENU_KEY ["   .. v124.KeyCode.Name   .. "]" ;v129=2 -1 ;end end end end);break;end end end);local v37=Drawing.new("Circle");v37.Thickness=581 -(361 + 219) ;v37.Color=Color3.fromRGB(0,575 -(53 + 267) ,23 + 77 );v37.Transparency=413.5 -(15 + 398) ;local function v41(v83) local v84=0 + 0 ;local v85;local v86;while true do if (v84==(984 -(18 + 964))) then v86=workspace:Raycast(v6.CFrame.Position,v83.Position-v6.CFrame.Position ,v85);return v86==nil ;end if (v84==(0 -0)) then if  not _G.WallCheck then return true;end v85=RaycastParams.new();v84=1494 -(711 + 782) ;end if (v84==(1 + 0)) then v85.FilterType=Enum.RaycastFilterType.Exclude;v85.FilterDescendantsInstances={v5.Character,v6};v84=471 -(270 + 199) ;end end end v1.RenderStepped:Connect(function() local v87=0 + 0 ;while true do if (v87==(1820 -(580 + 1239))) then v37.Position=v2:GetMouseLocation();if (_G.AimbotEnabled and v2:IsKeyDown(_G.AimbotKey)) then local v125=0 + 0 ;local v126;local v127;while true do if (v125==(126 -(116 + 10))) then v126,v127=nil,_G.AimbotFOV;for v146,v147 in pairs(v0:GetPlayers()) do if ((v147~=v5) and v147.Character and v147.Character:FindFirstChild(_G.TargetPart)) then local v161=0 + 0 ;local v162;local v163;local v164;while true do if ((739 -(542 + 196))==v161) then if v164 then local v166=0 + 0 ;local v167;while true do if (v166==(0 + 0)) then v167=(Vector2.new(v163.X,v163.Y) -v2:GetMouseLocation()).Magnitude;if ((v167<v127) and v41(v162)) then local v169=0 -0 ;while true do if (0==v169) then v127=v167;v126=v162;break;end end end break;end end end break;end if (v161==(0 -0)) then v162=v147.Character[_G.TargetPart];v163,v164=v6:WorldToViewportPoint(v162.Position);v161=1 + 0 ;end end end end v125=1 + 0 ;end if (v125==(1 + 0)) then if v126 then v6.CFrame=v6.CFrame:Lerp(CFrame.new(v6.CFrame.Position,v126.Position),_G.AimbotSmoothness);end break;end end end break;end if (v87==(0 + 0)) then v37.Visible=_G.ShowFOV;v37.Radius=_G.AimbotFOV;v87=1168 -(645 + 522) ;end end end);v2.InputBegan:Connect(function(v88) if (v88.KeyCode==_G.MenuKey) then v24();end end);v24();
+local v0 = game:GetService("Players");
+local v1 = game:GetService("RunService");
+local v2 = game:GetService("UserInputService");
+local v3 = game:GetService("CoreGui");
+local v4 = game:GetService("TweenService");
+local v5 = v0.LocalPlayer;
+local v6 = workspace.CurrentCamera;
+_G.AimbotEnabled = false;
+_G.AimbotKey = Enum.KeyCode.E;
+_G.MenuKey = Enum.KeyCode.RightShift;
+_G.AimbotSmoothness = 1080.5 - (1020 + 60);
+_G.AimbotFOV = 1573 - (630 + 793);
+_G.ShowFOV = false;
+_G.TargetPart = "Head";
+_G.WallCheck = true;
+local v9 = {Static="rbxassetid://140043289814504",Toggle="rbxassetid://80099403859001"};
+if v3:FindFirstChild("ZokaOS_V1") then
+	v3:FindFirstChild("ZokaOS_V1"):Destroy();
+end
+local v10 = Instance.new("ScreenGui", v3);
+v10.Name = "ZokaOS_V1";
+v10.IgnoreGuiInset = true;
+local v13 = Instance.new("Frame", v10);
+v13.Name = "MainFrame";
+v13.Size = UDim2.new(0 - 0, 350, 0 - 0, 955 - (118 + 287));
+v13.Position = UDim2.new(0.5 - 0, -(69 + 106), 0.2 - 0, 1747 - (760 + 987));
+v13.BackgroundColor3 = Color3.fromRGB(0 - 0, 377 - (142 + 235), 0 - 0);
+v13.Visible = false;
+v13.Active = true;
+v13.Draggable = true;
+local function v21(v42, v43)
+	local v44 = 1913 - (1789 + 124);
+	local v45;
+	while true do
+		if (v44 == (766 - (745 + 21))) then
+			v45 = Instance.new("Sound", v10);
+			v45.SoundId = v42;
+			v44 = 1 + 0;
+		end
+		if (v44 == (2 - 1)) then
+			v45.Volume = v43 or (0.5 - 0);
+			v45:Play();
+			v44 = 2 + 0;
+		end
+		if (v44 == (1 + 1)) then
+			task.delay(2 + 0, function()
+				v45:Destroy();
+			end);
+			break;
+		end
+	end
+end
+local function v22()
+	local v46 = Instance.new("Frame", v10);
+	v46.Size = UDim2.new(1 + 0, 1055 - (87 + 968), 0 - 0, math.random(8 - 6, 14 + 1));
+	v46.Position = UDim2.new(0 - 0, 0 - 0, math.random(), 1413 - (447 + 966));
+	v46.BackgroundColor3 = ((math.random() > (0.5 - 0)) and Color3.fromRGB(753 - (239 + 514), 2072 - (1703 + 114), 801 - (376 + 325))) or Color3.fromRGB(90 + 165, 417 - 162, 784 - 529);
+	v46.BorderSizePixel = 0 + 0;
+	v46.ZIndex = 2858 + 7142;
+	task.delay(0.04, function()
+		v46:Destroy();
+	end);
+end
+local v23 = false;
+local function v24()
+	if not v23 then
+		v23 = true;
+		v21(v9.Toggle, 0.7 - 0);
+		local v89 = v13.Position;
+		local v90 = v13.AbsolutePosition;
+		local v91 = v13.AbsoluteSize;
+		for v99 = 15 - (9 + 5), 406 - (85 + 291) do
+			local v100 = 731 - (476 + 255);
+			while true do
+				if ((1265 - (243 + 1022)) == v100) then
+					task.spawn(function()
+						local v130 = 0 - 0;
+						local v131;
+						local v132;
+						local v133;
+						local v134;
+						local v135;
+						local v136;
+						while true do
+							if (v130 == (1 + 0)) then
+								v131.ZIndex = 11181 - (1123 + 57);
+								v132 = v90.X + (v91.X / (2 + 0)) + math.random(-(544 - 244), 554 - (163 + 91));
+								v133 = v90.Y + (v91.Y / (240 - (64 + 174))) + math.random(-(2230 - (1869 + 61)), 84 + 216);
+								v131.Position = UDim2.new(0 - 0, v132, 0 - 0, v133);
+								v130 = 2;
+							end
+							if (v130 == (0 + 0)) then
+								v131 = Instance.new("Frame", v10);
+								v131.BorderSizePixel = 0 - 0;
+								v131.BackgroundColor3 = ((math.random() > (0.5 + 0)) and Color3.fromRGB(1474 - (1329 + 145), 1759 - (363 + 1141), 100)) or Color3.fromRGB(1226 - (140 + 831), 2105 - (1409 + 441), 973 - (15 + 703));
+								v131.Size = UDim2.new(0 + 0, 0 + 0, 438 - (262 + 176), 1721 - (345 + 1376));
+								v130 = 689 - (198 + 490);
+							end
+							if (v130 == (1936 - (565 + 1368))) then
+								v136:Play();
+								v22();
+								v136.Completed:Connect(function()
+									local v160 = 0 - 0;
+									while true do
+										if (v160 == (0 - 0)) then
+											task.wait(0.05 - 0);
+											v131:Destroy();
+											break;
+										end
+									end
+								end);
+								break;
+							end
+							if (v130 == (1208 - (696 + 510))) then
+								v131.BackgroundTransparency = 857 - (564 + 292);
+								v134 = v90.X + math.random(0 - 0, v91.X);
+								v135 = v90.Y + math.random(0, v91.Y);
+								v136 = v4:Create(v131, TweenInfo.new(0.5 - 0, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position=UDim2.new(1262 - (1091 + 171), v134, 304 - (244 + 60), v135),Size=UDim2.new(0 + 0, math.random(481 - (41 + 435), 5 + 20), 0 - 0, math.random(16 - 11, 1150 - (936 + 189))),BackgroundTransparency=(374.2 - (123 + 251)),Rotation=math.random(-180, 894 - 714)});
+								v130 = 701 - (208 + 490);
+							end
+						end
+					end);
+					if ((v99 % (4 + 2)) == (1138 - (782 + 356))) then
+						task.wait();
+					end
+					break;
+				end
+			end
+		end
+		task.wait(0.2 + 0);
+		v13.Visible = true;
+		for v101 = 1 + 0, 8 do
+			v22();
+			v13.Position = UDim2.new(v89.X.Scale, v89.X.Offset + math.random(-(841 - (660 + 176)), 1 + 4), v89.Y.Scale, v89.Y.Offset + math.random(-(1880 - (157 + 1718)), 5));
+			task.wait(202.01 - (14 + 188));
+		end
+		v13.Position = v89;
+	else
+		v23 = false;
+		v21(v9.Static, 0.8 - 0);
+		local v94 = v13.AbsolutePosition;
+		local v95 = v13.AbsoluteSize;
+		v13.Visible = false;
+		for v103 = 676 - (534 + 141), 11 + 14 do
+			local v104 = 0 + 0;
+			while true do
+				if (v104 == (0 - 0)) then
+					task.spawn(function()
+						local v137 = 0 - 0;
+						local v138;
+						local v139;
+						local v140;
+						local v141;
+						while true do
+							if (v137 == (2 + 0)) then
+								v139 = math.random(-(315 - 165), 238 - 88);
+								v140 = math.random(561 - 361, 269 + 231);
+								v141 = v4:Create(v138, TweenInfo.new(611.6 - (602 + 9), Enum.EasingStyle.Quart, Enum.EasingDirection.In), {Position=(v138.Position + UDim2.new(1189 - (449 + 740), v139, 0 + 0, v140)),Rotation=math.random(-(1127 - (245 + 702)), 576 - (115 + 281)),BackgroundTransparency=(1 + 0),Size=UDim2.new(1898 - (260 + 1638), 440 - (382 + 58), 0 - 0, 0 + 0)});
+								v137 = 7 - 4;
+							end
+							if ((5 - 2) == v137) then
+								v141:Play();
+								v22();
+								v141.Completed:Connect(function()
+									v138:Destroy();
+								end);
+								break;
+							end
+							if (v137 == (2 - 1)) then
+								v138.Size = UDim2.new(0 - 0, math.random(877 - (550 + 317), 1245 - (902 + 303)), 0 - 0, math.random(10, 56 - 16));
+								v138.Position = UDim2.new(0 - 0, v94.X + math.random(0, v95.X), 285 - (134 + 151), v94.Y + math.random(1665 - (970 + 695), v95.Y));
+								v138.ZIndex = 10001;
+								v137 = 3 - 1;
+							end
+							if (v137 == (683 - (483 + 200))) then
+								v138 = Instance.new("Frame", v10);
+								v138.BorderSizePixel = 1990 - (582 + 1408);
+								v138.BackgroundColor3 = ((math.random() > 0.5) and Color3.fromRGB(0 - 0, 320 - 65, 376 - 276)) or Color3.fromRGB(54 - 34, 1844 - (1195 + 629), 26 - 6);
+								v137 = 242 - (187 + 54);
+							end
+						end
+					end);
+					if ((v103 % (785 - (162 + 618))) == (0 + 0)) then
+						task.wait();
+					end
+					break;
+				end
+			end
+		end
+	end
+end
+local function v25(v52, v53)
+	local v54 = Instance.new("UIStroke", v52);
+	v54.Color = v53 or Color3.fromRGB(0 - 0, 255, 231 - 131);
+	v54.Thickness = 1 + 0;
+	Instance.new("UICorner", v52).CornerRadius = UDim.new(0 + 0, 8 - 4);
+end
+v25(v13);
+local v26 = Instance.new("TextLabel", v13);
+v26.Size = UDim2.new(1 - 0, 0 + 0, 1636 - (1373 + 263), 1050 - (451 + 549));
+v26.Text = "ZOKA_OS_V1  //  AIM_HUB";
+v26.TextColor3 = Color3.fromRGB(0 + 0, 396 - 141, 168 - 68);
+v26.Font = Enum.Font.Code;
+v26.TextSize = 4 + 12;
+v26.BackgroundTransparency = 1385 - (746 + 638);
+local function v34(v58, v59, v60, v61)
+	local v62 = 0 + 0;
+	local v63;
+	while true do
+		if (v62 == (4 - 1)) then
+			v63.MouseButton1Click:Connect(function()
+				v61(v63);
+			end);
+			return v63;
+		end
+		if ((343 - (218 + 123)) == v62) then
+			v63.Font = Enum.Font.Code;
+			v63.TextSize = 13;
+			v25(v63, v60);
+			v62 = 3;
+		end
+		if (v62 == (1582 - (1535 + 46))) then
+			v63.BackgroundColor3 = Color3.fromRGB(15, 15 + 0, 3 + 12);
+			v63.Text = v58;
+			v63.TextColor3 = v60 or Color3.fromRGB(815 - (306 + 254), 16 + 239, 500 - 245);
+			v62 = 1469 - (899 + 568);
+		end
+		if (v62 == (0 + 0)) then
+			v63 = Instance.new("TextButton", v13);
+			v63.Size = UDim2.new(0.9 - 0, 603 - (268 + 335), 0 + 0, 87 - 52);
+			v63.Position = v59;
+			v62 = 291 - (60 + 230);
+		end
+	end
+end
+v34("SYSTEM_ENABLE [OFF]", UDim2.new(572.05 - (426 + 146), 0 + 0, 0.1, 1456 - (282 + 1174)), nil, function(v64)
+	local v65 = 811 - (569 + 242);
+	while true do
+		if (v65 == (0 - 0)) then
+			_G.AimbotEnabled = not _G.AimbotEnabled;
+			v64.Text = "SYSTEM_ENABLE [" .. ((_G.AimbotEnabled and "ON") or "OFF") .. "]";
+			break;
+		end
+	end
+end);
+v34("SHOW_FOV [OFF]", UDim2.new(0.05 + 0, 0, 1024.18 - (706 + 318), 1251 - (721 + 530)), nil, function(v66)
+	_G.ShowFOV = not _G.ShowFOV;
+	v66.Text = "SHOW_FOV [" .. ((_G.ShowFOV and "ON") or "OFF") .. "]";
+end);
+v34("WALL_CHECK [ON]", UDim2.new(0.05, 1271 - (945 + 326), 0.26 - 0, 0 + 0), Color3.fromRGB(255, 900 - (271 + 429), 0 + 0), function(v68)
+	_G.WallCheck = not _G.WallCheck;
+	v68.Text = "WALL_CHECK [" .. ((_G.WallCheck and "ON") or "OFF") .. "]";
+end);
+v34("FOV_RADIUS: " .. _G.AimbotFOV, UDim2.new(0.05 + 0, 0, 1500.34 - (1408 + 92), 806 - (118 + 688)), Color3.fromRGB(0, 1341 - (461 + 625), 1438 - (993 + 295)), function(v70)
+	_G.AimbotFOV = ((_G.AimbotFOV >= (42 + 758)) and (1221 - (418 + 753))) or (_G.AimbotFOV + 20 + 30);
+	v70.Text = "FOV_RADIUS: " .. _G.AimbotFOV;
+end);
+v34("SMOOTH: " .. _G.AimbotSmoothness, UDim2.new(1886.05 - (927 + 959), 0 + 0, 0.42 + 0, 0 - 0), Color3.fromRGB(97 - (11 + 86), 65 + 190, 679 - (406 + 123)), function(v72)
+	local v73 = 1769 - (1749 + 20);
+	while true do
+		if (v73 == (0 + 0)) then
+			_G.AimbotSmoothness = ((_G.AimbotSmoothness >= (1323 - (1249 + 73))) and 0.1) or (_G.AimbotSmoothness + 0.1);
+			v72.Text = "SMOOTH: " .. string.format("%.1f", _G.AimbotSmoothness);
+			break;
+		end
+	end
+end);
+local v35 = {"Head","UpperTorso","HumanoidRootPart"};
+local v36 = 1 + 0;
+v34("TARGET: [Head]", UDim2.new(0.05 + 0, 1061 - (810 + 251), 1145.5 - (466 + 679), 0 - 0), Color3.fromRGB(0 - 0, 200, 2155 - (106 + 1794)), function(v74)
+	v36 = (v36 % #v35) + 1 + 0;
+	_G.TargetPart = v35[v36];
+	v74.Text = "TARGET: [" .. _G.TargetPart .. "]";
+end);
+v34("AIM_KEY [" .. _G.AimbotKey.Name .. "]", UDim2.new(0.05 + 0, 0 - 0, 733.58 - (711 + 22), 0), Color3.fromRGB(690 - 435, 114 - (4 + 110), 664 - (57 + 527)), function(v77)
+	local v78 = 859 - (240 + 619);
+	local v79;
+	while true do
+		if (v78 == (1 + 0)) then
+			v79 = v2.InputBegan:Connect(function(v123)
+				if (v123.UserInputType == Enum.UserInputType.Keyboard) then
+					local v128 = 1427 - (41 + 1386);
+					while true do
+						if (v128 == (103 - (17 + 86))) then
+							_G.AimbotKey = v123.KeyCode;
+							v77.Text = "AIM_KEY [" .. v123.KeyCode.Name .. "]";
+							v128 = 1 + 0;
+						end
+						if (v128 == 1) then
+							v79:Disconnect();
+							break;
+						end
+					end
+				end
+			end);
+			break;
+		end
+		if (v78 == (0 - 0)) then
+			v77.Text = "PRESS KEY...";
+			v79 = nil;
+			v78 = 2 - 1;
+		end
+	end
+end);
+v34("MENU_KEY [" .. _G.MenuKey.Name .. "]", UDim2.new(0.05 + 0, 166 - (122 + 44), 0.7 - 0, 0 - 0), Color3.fromRGB(556 - (183 + 223), 497 - 347, 123 + 27), function(v80)
+	local v81 = 0 + 0;
+	local v82;
+	while true do
+		if (v81 == (0 - 0)) then
+			v80.Text = "PRESS KEY...";
+			v82 = nil;
+			v81 = 66 - (30 + 35);
+		end
+		if (v81 == (1 + 0)) then
+			v82 = v2.InputBegan:Connect(function(v124)
+				if (v124.UserInputType == Enum.UserInputType.Keyboard) then
+					local v129 = 1257 - (1043 + 214);
+					while true do
+						if (v129 == (3 - 2)) then
+							v82:Disconnect();
+							break;
+						end
+						if (v129 == (1212 - (323 + 889))) then
+							_G.MenuKey = v124.KeyCode;
+							v80.Text = "MENU_KEY [" .. v124.KeyCode.Name .. "]";
+							v129 = 2 - 1;
+						end
+					end
+				end
+			end);
+			break;
+		end
+	end
+end);
+local v37 = Drawing.new("Circle");
+v37.Thickness = 581 - (361 + 219);
+v37.Color = Color3.fromRGB(0, 575 - (53 + 267), 23 + 77);
+v37.Transparency = 413.5 - (15 + 398);
+local function v41(v83)
+	local v84 = 0 + 0;
+	local v85;
+	local v86;
+	while true do
+		if (v84 == (984 - (18 + 964))) then
+			v86 = workspace:Raycast(v6.CFrame.Position, v83.Position - v6.CFrame.Position, v85);
+			return v86 == nil;
+		end
+		if (v84 == (0 - 0)) then
+			if not _G.WallCheck then
+				return true;
+			end
+			v85 = RaycastParams.new();
+			v84 = 1494 - (711 + 782);
+		end
+		if (v84 == (1 + 0)) then
+			v85.FilterType = Enum.RaycastFilterType.Exclude;
+			v85.FilterDescendantsInstances = {v5.Character,v6};
+			v84 = 471 - (270 + 199);
+		end
+	end
+end
+v1.RenderStepped:Connect(function()
+	local v87 = 0 + 0;
+	while true do
+		if (v87 == (1820 - (580 + 1239))) then
+			v37.Position = v2:GetMouseLocation();
+			if (_G.AimbotEnabled and v2:IsKeyDown(_G.AimbotKey)) then
+				local v125 = 0 + 0;
+				local v126;
+				local v127;
+				while true do
+					if (v125 == (126 - (116 + 10))) then
+						v126, v127 = nil, _G.AimbotFOV;
+						for v146, v147 in pairs(v0:GetPlayers()) do
+							if ((v147 ~= v5) and v147.Character and v147.Character:FindFirstChild(_G.TargetPart)) then
+								local v161 = 0 + 0;
+								local v162;
+								local v163;
+								local v164;
+								while true do
+									if ((739 - (542 + 196)) == v161) then
+										if v164 then
+											local v166 = 0 + 0;
+											local v167;
+											while true do
+												if (v166 == (0 + 0)) then
+													v167 = (Vector2.new(v163.X, v163.Y) - v2:GetMouseLocation()).Magnitude;
+													if ((v167 < v127) and v41(v162)) then
+														local v169 = 0 - 0;
+														while true do
+															if (0 == v169) then
+																v127 = v167;
+																v126 = v162;
+																break;
+															end
+														end
+													end
+													break;
+												end
+											end
+										end
+										break;
+									end
+									if (v161 == (0 - 0)) then
+										v162 = v147.Character[_G.TargetPart];
+										v163, v164 = v6:WorldToViewportPoint(v162.Position);
+										v161 = 1 + 0;
+									end
+								end
+							end
+						end
+						v125 = 1 + 0;
+					end
+					if (v125 == (1 + 0)) then
+						if v126 then
+							v6.CFrame = v6.CFrame:Lerp(CFrame.new(v6.CFrame.Position, v126.Position), _G.AimbotSmoothness);
+						end
+						break;
+					end
+				end
+			end
+			break;
+		end
+		if (v87 == (0 + 0)) then
+			v37.Visible = _G.ShowFOV;
+			v37.Radius = _G.AimbotFOV;
+			v87 = 1168 - (645 + 522);
+		end
+	end
+end);
+v2.InputBegan:Connect(function(v88)
+	if (v88.KeyCode == _G.MenuKey) then
+		v24();
+	end
+end);
+v24();
